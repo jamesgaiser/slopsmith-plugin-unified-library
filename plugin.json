@@ -5,5 +5,8 @@
   "private": false,
   "nav": { "label": "Unified Library", "screen": "plugin-unified_library" },
   "screen": "screen.html",
-  "script": "screen.js"
+  "script": "screen.js",
+  "settings": {
+    "html": "settings.html"
+  }
 }
