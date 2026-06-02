@@ -181,36 +181,43 @@ Compact settings panel (`settings.html`):
 ## Phases / checklist
 
 ### Phase 1 — Core merging (grid view)
-- [ ] MutationObserver on `#lib-grid`
-- [ ] Base-filename matcher for PSARC + sloppak pairs
-- [ ] Keep sloppak card, hide PSARC card (`data-ul-hidden`, CSS display:none)
-- [ ] Store both filenames on the surviving card (`data-ul-psarc`, `data-ul-sloppak`)
-- [ ] Replace `.fmt-badge` with dual clickable badge HTML
-- [ ] Badge click handlers → `playSong(thatFilename)` directly
-- [ ] Rename `.sloppak-convert-btn` text → "↺ Re-Convert"
-- [ ] `window._ul` live settings object + localStorage persistence
+- [x] MutationObserver on `#lib-grid`
+- [x] Base-filename matcher for PSARC + sloppak pairs
+- [x] Keep sloppak card, hide PSARC card (`data-ul-hidden`, CSS display:none)
+- [x] Store both filenames on the surviving card (`data-ul-psarc`, `data-ul-sloppak`)
+- [x] Replace `.fmt-badge` with dual clickable badge HTML
+- [x] Badge click handlers → `playSong(thatFilename)` directly
+- [x] Rename `.sloppak-convert-btn` text → "↺ Re-Convert"
+- [x] `window._ul` live settings object + localStorage persistence
+- [x] PSARC-filter Re-Convert: when format filter = "psarc" and sloppak cards are absent
+      from DOM (server-side filtering), detect known sloppak counterparts via a
+      persistent `_sloppakBases` cache (localStorage) and a background API call to
+      `/api/library?format=sloppak`, then rename the PSARC card's "Convert" →
+      "↺ Re-Convert" (`data-ul-reconvert-only`)
 
 ### Phase 2 — Play action
-- [ ] `window.playSong` wrapper to redirect merged-card clicks to correct format
-- [ ] Respects `window._ul.defaultFormat` ('sloppak' | 'psarc')
+- [x] `window.playSong` wrapper to redirect merged-card clicks to correct format
+- [x] Respects `window._ul.defaultFormat` ('sloppak' | 'psarc')
 
 ### Phase 3 — Settings screen
-- [ ] `screen.html` — enable toggle + default format radio + status section
-- [ ] `settings.html` — compact enable toggle + format dropdown
-- [ ] Nav entry in `plugin.json`
-- [ ] Live reload when settings change (re-run merge pass)
+- [x] `screen.html` — enable toggle + default format radio + status section
+- [x] `settings.html` — compact enable toggle + format dropdown
+- [x] Nav entry in `plugin.json`
+- [x] Live reload when settings change (re-run merge pass)
 
 ### Phase 4 — Tree/list view
-- [ ] MutationObserver on `#lib-tree`
-- [ ] Same merge logic on `.song-row[data-play]` elements
-- [ ] Dual inline badges (matching `formatBadgeInline` style, both clickable)
+- [x] MutationObserver on `#lib-tree`
+- [x] Same merge logic on `.song-row[data-play]` elements
+- [x] Dual inline badges (matching `formatBadgeInline` style, both clickable)
 
 ### Phase 5 — Polish
-- [ ] Badge tooltips ("Click to play as PSARC" / "Click to play as STEMS")
-- [ ] Merged count in status section of settings screen (live)
+- [x] Badge tooltips ("Click to play as PSARC" / "Click to play as STEMS")
+- [x] Merged count in status section of settings screen (live — updated after every merge pass)
 - [ ] Edge case: same title+artist but different base filenames
       (secondary match on title+artist when filename match fails)
+      → Deferred: parsing DOM text is fragile; covers <1% of real libraries
 - [ ] Edge case: PSARC + plain sloppak (no stems) + STEMS variant (3-way)
+      → Deferred: two sloppak files with the same base name can't coexist on disk
 
 ---
 

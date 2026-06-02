@@ -1,6 +1,46 @@
-<!-- Phase 3: settings screen — coming soon -->
-<div id="ul-root" class="max-w-xl mx-auto py-8 px-4 text-gray-300">
-  <h2 class="text-lg font-semibold text-white mb-1">Unified Library</h2>
-  <p class="text-sm text-gray-500 mb-6">Merges duplicate PSARC and sloppak entries into a single card.</p>
-  <p class="text-sm text-gray-400">Settings screen coming in a future update.</p>
+<div id="ul-settings-root" class="max-w-2xl mx-auto px-6 pt-24 pb-16">
+  <h1 class="text-3xl font-bold text-white mb-1">Unified Library</h1>
+  <p class="text-sm text-gray-400 mb-8">Combines duplicate PSARC and sloppak entries into one card.</p>
+
+  <div class="divide-y divide-gray-800">
+
+    <!-- Enabled row -->
+    <div class="flex items-center justify-between gap-8 py-5">
+      <div>
+        <div class="text-sm font-medium text-white">Enabled</div>
+        <div class="text-xs text-gray-500 mt-0.5">Hide the PSARC card when a sloppak version exists, merging both into one</div>
+      </div>
+      <button id="ul-toggle" role="switch" aria-checked="true"
+        class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors duration-200 focus:outline-none">
+        <span class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow pointer-events-none"
+              style="transition: transform 0.2s ease;"></span>
+      </button>
+    </div>
+
+    <!-- Default format -->
+    <div class="py-5" id="ul-fmt-section">
+      <div class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">Default format</div>
+      <div class="space-y-3">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="radio" name="ul-fmt" value="sloppak" id="ul-fmt-sloppak" checked class="accent-blue-500">
+          <span class="text-sm text-gray-300">sloppak <span class="text-xs text-gray-500 ml-1">recommended</span></span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="radio" name="ul-fmt" value="psarc" id="ul-fmt-psarc" class="accent-blue-500">
+          <span class="text-sm text-gray-300">PSARC</span>
+        </label>
+      </div>
+      <p class="text-xs text-gray-500 mt-4">Click the format badge on a merged card to override per-play.</p>
+    </div>
+
+    <!-- Status -->
+    <div class="py-5">
+      <div class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">Status</div>
+      <div class="space-y-2 text-sm">
+        <div class="text-gray-400">Sloppak Converter: <span id="ul-status-converter" class="text-gray-500">checking…</span></div>
+        <div id="ul-status-merged" class="text-gray-400"></div>
+      </div>
+    </div>
+
+  </div>
 </div>

@@ -1,4 +1,76 @@
-<!-- Phase 3: compact settings panel — coming soon -->
-<div class="text-sm text-gray-400 px-1">
-  Unified Library active. <a class="text-accent underline cursor-pointer" onclick="window.showScreen?.('plugin-unified_library')">Settings</a>
+<div class="space-y-3">
+
+  <!-- Enabled row -->
+  <div class="flex items-center justify-between gap-4">
+    <span class="text-sm text-gray-300 font-medium">Enabled</span>
+    <button id="ul-s-toggle" role="switch" aria-checked="true"
+      class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full focus:outline-none">
+      <span class="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow pointer-events-none"
+            style="transition: transform 0.2s ease;"></span>
+    </button>
+  </div>
+
+  <!-- Default format row -->
+  <div class="flex items-center justify-between gap-4" id="ul-s-fmt-row">
+    <span class="text-xs text-gray-500">Default</span>
+    <select id="ul-s-format"
+      class="bg-dark-700 border border-gray-800 rounded px-2 py-1 text-xs text-gray-300 outline-none">
+      <option value="sloppak">sloppak</option>
+      <option value="psarc">PSARC</option>
+    </select>
+  </div>
+
+  <!-- Link -->
+  <div class="text-right pt-1">
+    <a class="text-xs text-gray-500 hover:text-gray-300 cursor-pointer transition-colors"
+       onclick="window.showScreen && window.showScreen('plugin-unified_library')">More settings →</a>
+  </div>
+
 </div>
+
+<script>
+(function () {
+  var ul = window._ul;
+  if (!ul) return;
+
+  var toggleBtn = document.getElementById('ul-s-toggle');
+  var formatEl  = document.getElementById('ul-s-format');
+  var fmtRow    = document.getElementById('ul-s-fmt-row');
+
+  function _applyToggle() {
+    if (!toggleBtn) return;
+    var on = ul.enabled !== false;
+    toggleBtn.style.backgroundColor = on ? '#2563eb' : '#4b5563';
+    toggleBtn.setAttribute('aria-checked', String(on));
+    var knob = toggleBtn.querySelector('span');
+    if (knob) knob.style.transform = on ? 'translateX(1rem)' : 'translateX(0)';
+  }
+
+  function _updateFmtRow() {
+    if (!fmtRow) return;
+    var off = ul.enabled === false;
+    fmtRow.style.opacity       = off ? '0.4' : '1';
+    fmtRow.style.pointerEvents = off ? 'none' : '';
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function () {
+      ul.enabled = !ul.enabled;
+      ul._reload && ul._reload();
+      _applyToggle();
+      _updateFmtRow();
+    });
+  }
+
+  if (formatEl) {
+    formatEl.value = ul.defaultFormat || 'sloppak';
+    formatEl.addEventListener('change', function () {
+      ul.defaultFormat = this.value;
+      ul._reload && ul._reload();
+    });
+  }
+
+  _applyToggle();
+  _updateFmtRow();
+})();
+</script>
