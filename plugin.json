@@ -1,0 +1,9 @@
+{
+  "id": "unified_library",
+  "name": "Unified Library",
+  "version": "0.1.0",
+  "private": false,
+  "nav": { "label": "Unified Library", "screen": "plugin-unified_library" },
+  "screen": "screen.html",
+  "script": "screen.js"
+}
